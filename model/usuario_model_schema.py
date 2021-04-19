@@ -29,7 +29,16 @@ class Usuario(UsuarioModel):
         
         except:
             self.save(force_insert=True)
+    
+    @classmethod
+    def read_usuarios(cls):
+
+        usuarios = cls.select()
+        if usuarios:
+            return usuarios
             
+        return None
+        
     @classmethod
     def logar(cls, login, senha):
         
@@ -76,15 +85,6 @@ class Admin(Usuario):
         usuario = cls.get_or_none(cls.idusuario == idusuario)
         if usuario:
             return usuario
-            
-        return None
-
-    @classmethod
-    def read_usuarios(cls):
-
-        usuarios = cls.select()
-        if usuarios:
-            return usuarios
             
         return None
 
