@@ -11,3 +11,57 @@ class PalavraModel(Model):
 
     class Meta:
         database = db
+
+    def create_palavra(self):
+
+        try:
+            self.save()
+            return True
+        
+        except:
+            self.save(force_insert=True)
+    
+    @classmethod
+    def read_palavra(cls, idpalavra):
+
+        palavra = cls.get_or_none(cls.idpalavra == idpalavra)
+        if palavra:
+            return palavra
+            
+        return None
+
+    @classmethod
+    def read_palavras(cls):
+
+        palavras = cls.select()
+        if palavras:
+            return palavras
+            
+        return None
+
+    def update_palavra(self, nome, fkcodcategoria):
+
+        try:
+            self.nome = nome
+            self.fkcodcategoria = fkcodcategoria
+            self.save()
+
+            return True
+
+        except:
+            return None
+            
+    def delete_palavra(self):
+        
+        try:
+            self.delete_instance()
+        except:
+            return None
+    
+    def json(self):
+
+        return {
+                'idpalavra': self.idpalavra,
+                'nome': self.nome,
+                'fkcodcategoria': self.fkcodcategoria.idcategoria,
+               }

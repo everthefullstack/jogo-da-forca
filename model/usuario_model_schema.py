@@ -35,11 +35,11 @@ class Usuario(UsuarioModel):
         
         try:
             usuario = cls.get_or_none(cls.login == login, cls.senha == senha)
-            if usuario:
+            if usuario.token:
 
                 usuario.token = uuid4().hex
                 usuario.save()
-                return usuario.token
+                return usuario.token, usuario.admin
         except:
             return None
     
@@ -65,15 +65,15 @@ class Usuario(UsuarioModel):
                 'admin': self.admin
                }
 
-class Admin(UsuarioModel):
+class Admin(Usuario):
 
     class Meta:
-        database = db
+        table_name = 'usuariomodel'
 
     @classmethod
     def read_usuario(cls, idusuario):
 
-        usuario = cls.get_or_none(cls.login == idusuario)
+        usuario = cls.get_or_none(cls.idusuario == idusuario)
         if usuario:
             return usuario
             
@@ -88,15 +88,15 @@ class Admin(UsuarioModel):
             
         return None
 
-    def update_usuario(self, login, senha, pontuacao, token, admin):
+    def update_usuario(self, login, senha, admin):
 
         try:
             self.login = login
             self.senha = senha
-            self.pontuacao = pontuacao
-            self.token = token
             self.admin = admin
             self.save()
+
+            return True
         except:
             return None
             
@@ -106,15 +106,3 @@ class Admin(UsuarioModel):
             self.delete_instance()
         except:
             return None
-    
-    def json(self):
-
-        return {
-                'idusuario': self.idusuario,
-                'login': self.login,
-                'senha': self.senha,
-                'pontuacao': self.pontuacao,
-                'pontuacao_ranking': self.pontuacao_ranking,
-                'token': self.token,
-                'admin': self.admin
-               }
