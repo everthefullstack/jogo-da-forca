@@ -44,11 +44,11 @@ class Usuario(UsuarioModel):
         
         try:
             usuario = cls.get_or_none(cls.login == login, cls.senha == senha)
-            if usuario.token:
+            if usuario:
 
                 usuario.token = uuid4().hex
                 usuario.save()
-                return usuario.token, usuario.admin
+                return usuario
         except:
             return None
     
