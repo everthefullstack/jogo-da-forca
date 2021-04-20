@@ -7,7 +7,7 @@ router = APIRouter()
 @router.get("/ranking/mostrar_ranking")
 async def read_ranking(request: Request):
 
-    token = request.cookies.get("usuario")
+    token = request.headers["usuario"]
     usuario = Usuario()
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
@@ -20,7 +20,7 @@ async def read_ranking(request: Request):
             for usuario in usuarios:
                 lista_usuarios.append(usuario.json())
 
-            return {'message': lista_usuarios}
+            return lista_usuarios
    
         return {"mensagem" : "usuarios não cadastrados."}
     

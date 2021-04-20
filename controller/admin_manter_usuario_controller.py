@@ -13,7 +13,7 @@ router = APIRouter()
 @router.post("/admin/cadastrar_usuario")
 async def create_usuario(cadastro: Cadastro, request: Request):
 
-    tipo = bool(request.cookies.get("tipo"))
+    tipo = bool(request.headers["tipo"])
     if tipo == True:
 
         usuario = Admin(login = cadastro.login, senha = cadastro.senha, admin = cadastro.admin)
@@ -30,8 +30,7 @@ async def create_usuario(cadastro: Cadastro, request: Request):
 @router.get("/admin/ler_usuarios")
 async def read_usuarios(request: Request):
 
-    tipo = bool(request.cookies.get("tipo"))
-
+    tipo = bool(request.headers["tipo"])
     if tipo == True:
 
         lista_usuarios = []
@@ -52,8 +51,7 @@ async def read_usuarios(request: Request):
 @router.get("/admin/ler_usuarios/{idusuario}")
 async def read_usuario(request: Request, idusuario: int):
 
-    tipo = bool(request.cookies.get("tipo"))
-
+    tipo = bool(request.headers["tipo"])
     if tipo == True:
 
         usuario = Admin.read_usuario(idusuario)
@@ -70,8 +68,7 @@ async def read_usuario(request: Request, idusuario: int):
 @router.put("/admin/editar_usuario/{idusuario}")
 async def edit_usuario(idusuario: int, cadastro: Cadastro, request: Request):
 
-    tipo = bool(request.cookies.get("tipo"))
-
+    tipo = bool(request.headers["tipo"])
     if tipo == True:
 
         usuario = Admin.read_usuario(idusuario)
@@ -89,8 +86,7 @@ async def edit_usuario(idusuario: int, cadastro: Cadastro, request: Request):
 @router.delete("/admin/deletar_usuario/{idusuario}")
 async def delete_usuario(idusuario: int, request: Request):
 
-    tipo = bool(request.cookies.get("tipo"))
-
+    tipo = bool(request.headers["tipo"])
     if tipo == True:
 
         usuario = Admin.read_usuario(idusuario)
