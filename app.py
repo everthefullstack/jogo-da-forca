@@ -1,6 +1,8 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from controller import login_controller, cadastro_controller, cria_banco_controller, admin_manter_usuario_controller, admin_manter_categoria_controller, admin_manter_palavra_controller, ranking_controller, admin_manter_shop_controller
+from controller import (login_controller, cadastro_controller, cria_banco_controller, admin_manter_usuario_controller, 
+                        admin_manter_categoria_controller, admin_manter_palavra_controller, ranking_controller, 
+                        admin_manter_shop_controller)
 
 app = FastAPI()
 
