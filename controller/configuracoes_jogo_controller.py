@@ -9,6 +9,9 @@ router = APIRouter()
 class Configuracao(BaseModel):
     fkcodusuario: int
 
+class Categoria(BaseModel):
+    fkcodcategoria: int
+
 @router.post("/configuracao/ler_configuracoes")
 async def read_configuracoes(configuracao: Configuracao, request: Request):
 
@@ -19,31 +22,56 @@ async def read_configuracoes(configuracao: Configuracao, request: Request):
 
         lista_config = []
         lista_cmp = []
-        lista_plv = []
         lista_cat = []
 
         cmp = CompraModel.read_compras_usuario(fkcodusuario=configuracao.fkcodusuario)
-        plv = PalavraModel.read_palavras()
         cat = CategoriaModel.read_categorias()
         
         if cmp:
 
             for compra in cmp:
                 lista_cmp.append(compra.json())
-
-        if plv:
-            for palavra in plv:
-                lista_plv.append(palavra.json())
         
         if cat:
             for categoria in cat:
                 lista_cat.append(categoria.json())
         
         lista_config.append({"lista_compras": lista_cmp})
-        lista_config.append({"lista_palavras": lista_plv})
         lista_config.append({"lista_categorias": lista_cat})
 
         return {"mensagem" : lista_config}
 
     else:
+        return {"mensagem" : "Usuário não autenticado."}
+
+@router.post("/configuracao/ler_palavras_categoria")
+async def read_configuracoes(categoria: Categoria, request: Request):
+
+    token = request.headers["usuario"]
+    usuario = Usuario()
+
+    if usuario.autenticar(token) == token and(token != 0 and token != None):
+
+        lista_plv = []
+
+        if categoria.fkcodcategoria == 0:
+
+            plv = PalavraModel.read_categorias()
+
+            if plv:
+                for palavra in plv:
+                    lista_plv.append(palavra.json())
+
+        else:
+
+            plv = PalavraModel.read_palavras_por_categoria(fkcodcategoria=categoria.fkcodcategoria)
+
+            if plv:
+                for palavra in plv:
+                    lista_plv.append(palavra.json())
+
+        return {"mensagem" : lista_plv}
+
+    else:
+
         return {"mensagem" : "Usuário não autenticado."}
