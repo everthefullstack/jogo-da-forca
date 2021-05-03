@@ -28,3 +28,24 @@ class CompraModel(Model):
         
         except:
             self.save(force_insert=True)
+    
+    @classmethod
+    def read_compras_usuario(cls, fkcodusuario):
+        try:
+            shops = cls.select().where(cls.fkcodusuario == fkcodusuario)
+            if shops:
+                return shops
+                
+            return None
+
+        except:
+            return None
+    
+    def json(self):
+
+        return {
+                'idcompra': self.idcompra,
+                'fkcodshop': self.fkcodshop.idshop,
+                'fkcodusuario': self.fkcodusuario.idusuario,
+                'quantidade': self.quantidade,
+               }

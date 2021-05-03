@@ -39,6 +39,15 @@ class PalavraModel(Model):
             
         return None
 
+    @classmethod
+    def read_palavras_por_categoria(cls, fkcodcategoria):
+
+        palavras = cls.select().where(cls.fkcodcategoria == fkcodcategoria)
+        if palavras:
+            return palavras
+            
+        return None
+        
     def update_palavra(self, nome, fkcodcategoria):
 
         try:
