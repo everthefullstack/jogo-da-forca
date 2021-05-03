@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField, BooleanField, Model, SqliteDatabase
+from peewee import PrimaryKeyField, CharField, BooleanField, FloatField, Model, SqliteDatabase
 from uuid import uuid4
 
 db = SqliteDatabase('database/forca.db')
@@ -8,8 +8,8 @@ class UsuarioModel(Model):
     idusuario = PrimaryKeyField(primary_key=True)
     login = CharField(null=False, unique=True)
     senha = CharField(null=False)
-    pontuacao = CharField(null=True, default="0")
-    pontuacao_ranking = CharField(null=True, default="0")
+    pontuacao = FloatField(null=True, default="0")
+    pontuacao_ranking = FloatField(null=True, default="0")
     token = CharField(null=True, default="0")
     admin = BooleanField(null=True, default=False)
     
@@ -30,6 +30,15 @@ class Usuario(UsuarioModel):
         except:
             self.save(force_insert=True)
     
+    @classmethod
+    def read_usuario(cls, idusuario):
+
+        usuario = cls.get_or_none(cls.idusuario == idusuario)
+        if usuario:
+            return usuario
+            
+        return None
+
     @classmethod
     def read_usuarios(cls):
 
@@ -78,15 +87,6 @@ class Admin(Usuario):
 
     class Meta:
         table_name = 'usuariomodel'
-
-    @classmethod
-    def read_usuario(cls, idusuario):
-
-        usuario = cls.get_or_none(cls.idusuario == idusuario)
-        if usuario:
-            return usuario
-            
-        return None
 
     def update_usuario(self, login, senha, admin):
 

@@ -5,7 +5,7 @@ from model.shop_model_schema import ShopModel
 class Shop(BaseModel):
 
     nome: str
-    valor: float
+    valor: str
     imagem: str
 
 router = APIRouter()
@@ -16,7 +16,7 @@ async def create_shop(shop: Shop, request: Request):
     tipo = bool(request.headers["tipo"])
     if tipo == True:
 
-        shop = Shop(nome = shop.nome, valor = shop.valor, imagem = shop.imagem)
+        shop = ShopModel(nome = shop.nome, valor = shop.valor, imagem = shop.imagem)
         if shop.create_shop():
             return {"mensagem" : "shop cadastrado."}
         
@@ -99,3 +99,4 @@ async def delete_shop(idshop: int, request: Request):
 
     else:
         return {"mensagem" : "Somente um ADM pode deletar uma shop."}
+      
