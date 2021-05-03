@@ -37,7 +37,7 @@ async def create_compra(compra: Compra, request: Request):
                 cmp.create_compra(compra.fkcodshop, compra.fkcodusuario, compra.quantidade)
                 usuario.pontuacao = usuario.pontuacao - (shop.valor * compra.quantidade)
                 usuario.save()
-                return {"mensagem" : "Compra cadastrada."}
+                return {"mensagem" : usuario.read_usuario(idusuario = compra.fkcodusuario).json()}
         else:
             return {"mensagem" : "Usuário ou Shop inexistente."}
 
