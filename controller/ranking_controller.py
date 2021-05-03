@@ -20,9 +20,9 @@ async def read_ranking(request: Request):
             for usuario in usuarios:
                 lista_usuarios.append(usuario.json())
 
-            return lista_usuarios
+            return {'mensagem': lista_usuarios}
    
-        return {"mensagem" : "usuarios não cadastrados."}
+        return {"mensagem" : lista_usuarios}
     
     else:
         return {"mensagem" : "Não foi possível mostrar o ranking."}

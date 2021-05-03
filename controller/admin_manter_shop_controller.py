@@ -40,9 +40,9 @@ async def read_shops(request: Request):
             for shop in shops:
                 lista_shops.append(shop.json())
 
-            return {'message': lista_shops}
+            return {'mensagem': lista_shops}
    
-        return {"mensagem" : "shops não cadastradas."}
+        return {"mensagem" : lista_shops}
 
     else:
         return {"mensagem" : "Somente um ADM pode solicitar a lista de shops."}
@@ -56,7 +56,7 @@ async def read_shop(request: Request, idshop: int):
         shop = ShopModel.read_shop(idshop)
 
         if shop:
-            return {'message': shop.json()}
+            return {'mensagem': shop.json()}
 
         else:
             return {"mensagem" : "shop não cadastrada."}

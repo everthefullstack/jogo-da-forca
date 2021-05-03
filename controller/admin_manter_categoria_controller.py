@@ -39,9 +39,9 @@ async def read_categorias(request: Request):
             for categoria in categorias:
                 lista_categorias.append(categoria.json())
 
-            return {'message': lista_categorias}
+            return {'mensagem': lista_categorias}
    
-        return {"mensagem" : "categorias não cadastradas."}
+        return {"mensagem" : lista_categorias}
 
     else:
         return {"mensagem" : "Somente um ADM pode solicitar a lista de categorias."}
@@ -55,7 +55,7 @@ async def read_categoria(request: Request, idcategoria: int):
         categoria = CategoriaModel.read_categoria(idcategoria)
 
         if categoria:
-            return {'message': categoria.json()}
+            return {'mensagem': categoria.json()}
 
         else:
             return {"mensagem" : "categoria não cadastrada."}

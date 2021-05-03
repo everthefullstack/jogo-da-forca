@@ -39,9 +39,9 @@ async def read_palavras(request: Request):
             for palavra in palavras:
                 lista_palavras.append(palavra.json())
 
-            return {'message': lista_palavras}
+            return {'mensagem': lista_palavras}
    
-        return {"mensagem" : "palavras não cadastradas."}
+        return {"mensagem" : lista_palavras}
 
     else:
         return {"mensagem" : "Somente um ADM pode solicitar a lista de palavras."}
@@ -55,7 +55,7 @@ async def read_palavra(request: Request, idpalavra: int):
         palavra = PalavraModel.read_palavra(idpalavra)
 
         if palavra:
-            return {'message': palavra.json()}
+            return {'mensagem': palavra.json()}
 
         else:
             return {"mensagem" : "palavra não cadastrada."}

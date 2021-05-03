@@ -17,11 +17,14 @@ class CompraModel(Model):
     def create_compra(self, fkcodshop, fkcodusuario, quantidade):
 
         try:
-            compra = self.get_or_none(self.fkcodshop == fkcodshop, self.fkcodusuario == fkcodusuario)
+            compra = CompraModel.get(CompraModel.fkcodshop == fkcodshop, CompraModel.fkcodusuario == fkcodusuario)
             if compra:
-                return compra
+                compra.quantidade = compra.quantidade + quantidade
+                compra.save()
+                return True
             else:
-                return None
+                self.save()
+                return True
         
-        except Exception as erro:
-            return erro
+        except:
+            self.save(force_insert=True)

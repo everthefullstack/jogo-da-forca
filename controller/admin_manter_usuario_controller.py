@@ -41,9 +41,9 @@ async def read_usuarios(request: Request):
             for usuario in usuarios:
                 lista_usuarios.append(usuario.json())
 
-            return {'message': lista_usuarios}
+            return {'mensagem': lista_usuarios}
    
-        return {"mensagem" : "usuarios não cadastrados."}
+        return {"mensagem" : lista_usuarios}
 
     else:
         return {"mensagem" : "Somente um ADM pode solicitar a lista de usuários."}
@@ -57,10 +57,10 @@ async def read_usuario(request: Request, idusuario: int):
         usuario = Admin.read_usuario(idusuario)
 
         if usuario:
-            return {'message': usuario.json()}
+            return {'mensagem': usuario.json()}
 
         else:
-            return {"mensagem" : "usuario não cadastrado."}
+            return {"mensagem" : usuario}
 
     else:
         return {"mensagem" : "Somente um ADM pode solicitar um usuario."}

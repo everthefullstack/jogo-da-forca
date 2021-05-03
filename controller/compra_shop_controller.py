@@ -30,10 +30,9 @@ async def create_compra(compra: Compra, request: Request):
                 return {"mensagem" : "Usuário não tem pontos suficientes para compra."}
 
             else:
+                cmp.create_compra(compra.fkcodshop, compra.fkcodusuario, compra.quantidade)
                 usuario.pontuacao = usuario.pontuacao - (shop.valor * compra.quantidade)
                 usuario.save()
-                teste = cmp.create_compra(compra.fkcodshop, compra.fkcodusuario, compra.quantidade)
-                print(teste)
                 return {"mensagem" : "Compra cadastrada."}
         else:
             return {"mensagem" : "Usuário ou Shop inexistente."}
