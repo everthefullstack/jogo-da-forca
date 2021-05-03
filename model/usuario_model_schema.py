@@ -64,7 +64,7 @@ class Usuario(UsuarioModel):
     @classmethod
     def autenticar(cls, token):
         try:
-            usuario = cls.get_or_none(cls.token)
+            usuario = cls.get(cls.token == token)
             if usuario.token != 0:
                 return usuario.token
 
