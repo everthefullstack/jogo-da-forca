@@ -9,7 +9,7 @@ router = APIRouter()
 class Configuracao(BaseModel):
     fkcodusuario: int
 
-@router.get("/configuracao/ler_configuracoes")
+@router.post("/configuracao/ler_configuracoes")
 async def read_configuracoes(configuracao: Configuracao, request: Request):
 
     token = request.headers["usuario"]
