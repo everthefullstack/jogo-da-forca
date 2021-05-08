@@ -43,12 +43,12 @@ class CompraModel(Model):
             return None
 
     @classmethod
-    def read_compras_usuario(cls, idshop):
+    def read_compras_usuario(cls, fkcodusuario):
 
         try:
-            shop = cls.select().where(cls.idc == fkcodusuario)
-            if shop:
-                return shop
+            shops = cls.select().where(cls.fkcodusuario == fkcodusuario)
+            if shops:
+                return shops
                 
             return None
 
