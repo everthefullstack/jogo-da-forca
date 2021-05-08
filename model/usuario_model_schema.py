@@ -75,10 +75,13 @@ class Usuario(UsuarioModel):
 
         try:
             if self.pontuacao_ranking <= pontuacao:
-                self.pontuacao_ranking = pontuacao
-
-            self.pontuacao = self.pontuacao + pontuacao
-            self.save()
+                self.pontuacao_ranking = self.pontuacao_ranking + pontuacao
+                self.pontuacao = self.pontuacao + pontuacao
+                self.save()
+            
+            else:
+                self.pontuacao = self.pontuacao + pontuacao
+                self.save()
 
             return True
         except:
