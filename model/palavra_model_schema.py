@@ -7,7 +7,7 @@ class PalavraModel(Model):
 
     idpalavra = PrimaryKeyField(primary_key=True)
     nome = CharField(null=False, unique=True)
-    fkcodcategoria = ForeignKeyField(CategoriaModel, null=False)
+    fkcodcategoria = ForeignKeyField(CategoriaModel, null=False, on_delete="SET NULL")
 
     class Meta:
         database = db

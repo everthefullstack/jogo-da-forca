@@ -4,6 +4,7 @@ from model.usuario_model_schema import Usuario
 from model.compra_model_schema import CompraModel
 from model.palavra_model_schema import PalavraModel
 from model.categoria_model_schema import CategoriaModel
+
 router = APIRouter()
 
 class Configuracao(BaseModel):
@@ -56,7 +57,7 @@ async def read_configuracoes(categoria: Categoria, request: Request):
 
         if categoria.fkcodcategoria == 0:
 
-            plv = PalavraModel.read_categorias()
+            plv = PalavraModel.read_palavras()
 
             if plv:
                 for palavra in plv:
