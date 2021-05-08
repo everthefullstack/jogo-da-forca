@@ -16,6 +16,9 @@ class Categoria(BaseModel):
 class Compra(BaseModel):
     idcompra: int
 
+class Pontuacao(BaseModel):
+    pontuacao: float
+
 @router.post("/configuracao/ler_configuracoes")
 async def read_configuracoes(configuracao: Configuracao, request: Request):
 
@@ -99,14 +102,14 @@ async def update_quantidade(comprausuario: Compra, request: Request):
         return {"mensagem" : "Usuário não autenticado."}
 
 @router.post("/configuracao/salvar_pontuacao")
-async def update_pontuacao(comprausuario: Compra, request: Request):
+async def update_pontuacao(pontuacao: Pontuacao, request: Request):
 
     token = request.headers["usuario"]
     usuario = Usuario()
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
 
-        if usuario.update_pontuacao():
+        if usuario.update_pontuacao(pontuacao.pontuacao):
             return {"mensagem" : usuario.json()}
 
         else:
