@@ -109,7 +109,7 @@ async def update_pontuacao(pontuacao: Pontuacao, request: Request):
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
 
-        if usuario.update_pontuacao(pontuacao.pontuacao):
+        if usuario.update_pontuacao(pontuacao= pontuacao.pontuacao):
             return {"mensagem" : usuario.json()}
 
         else:
