@@ -30,17 +30,45 @@ class CompraModel(Model):
             self.save(force_insert=True)
     
     @classmethod
-    def read_compras_usuario(cls, fkcodusuario):
+    def read_compra(cls, idcompra):
+
         try:
-            shops = cls.select().where(cls.fkcodusuario == fkcodusuario)
-            if shops:
-                return shops
+            shop = cls.select().where(cls.idcompra == idcompra)
+            if shop:
+                return shop
+                
+            return None
+
+        except:
+            return None
+
+    @classmethod
+    def read_compras_usuario(cls, idshop):
+
+        try:
+            shop = cls.select().where(cls.idc == fkcodusuario)
+            if shop:
+                return shop
                 
             return None
 
         except:
             return None
     
+    def update_compra(self):
+
+        try:
+            if quantidade >= 0:
+                self.quantidade = self.quantidade - 1
+                self.save()
+                return True
+            
+            else:
+                return None
+
+        except:
+            return None
+
     def json(self):
 
         return {

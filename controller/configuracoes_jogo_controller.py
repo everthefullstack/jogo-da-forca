@@ -13,6 +13,9 @@ class Configuracao(BaseModel):
 class Categoria(BaseModel):
     fkcodcategoria: int
 
+class Compra(BaseModel):
+    idcompra: int
+
 @router.post("/configuracao/ler_configuracoes")
 async def read_configuracoes(configuracao: Configuracao, request: Request):
 
@@ -46,7 +49,7 @@ async def read_configuracoes(configuracao: Configuracao, request: Request):
         return {"mensagem" : "Usuário não autenticado."}
 
 @router.post("/configuracao/ler_palavras_categoria")
-async def read_configuracoes(categoria: Categoria, request: Request):
+async def read_palavras_categoria(categoria: Categoria, request: Request):
 
     token = request.headers["usuario"]
     usuario = Usuario()
@@ -75,4 +78,38 @@ async def read_configuracoes(categoria: Categoria, request: Request):
 
     else:
 
+        return {"mensagem" : "Usuário não autenticado."}
+
+@router.post("/configuracao/altera_quantidade")
+async def update_quantidade(comprausuario: Compra, request: Request):
+
+    token = request.headers["usuario"]
+    usuario = Usuario()
+
+    if usuario.autenticar(token) == token and(token != 0 and token != None):
+
+        compra = Compra.read_compra(idcompra=comprausuario.idcompra)
+        
+        if compra.update_compra():
+            return {"mensagem" : compra.json()}
+
+        else:
+            return {"mensagem" : "Quantidade não alterada."}
+    else:
+        return {"mensagem" : "Usuário não autenticado."}
+
+@router.post("/configuracao/salvar_pontuacao")
+async def update_pontuacao(comprausuario: Compra, request: Request):
+
+    token = request.headers["usuario"]
+    usuario = Usuario()
+
+    if usuario.autenticar(token) == token and(token != 0 and token != None):
+
+        if usuario.update_pontuacao():
+            return {"mensagem" : usuario.json()}
+
+        else:
+            return {"mensagem" : "Pontuações não alteradas."}
+    else:
         return {"mensagem" : "Usuário não autenticado."}

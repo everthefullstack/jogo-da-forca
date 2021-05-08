@@ -71,6 +71,19 @@ class Usuario(UsuarioModel):
         except:
             return None
 
+    def update_pontuacao(self, pontuacao):
+
+        try:
+            if self.pontuacao_ranking <= pontuacao:
+                self.pontuacao_ranking = pontuacao
+
+            self.pontuacao = self.pontuacao + pontuacao
+            self.save()
+
+            return True
+        except:
+            return None
+
     def json(self):
 
         return {
