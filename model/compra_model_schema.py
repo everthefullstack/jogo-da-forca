@@ -33,7 +33,7 @@ class CompraModel(Model):
     def read_compra(cls, idcompra):
 
         try:
-            shop = cls.select().where(cls.idcompra == idcompra)
+            shop = cls.get_or_none(cls.idcompra == idcompra)
             if shop:
                 return shop
                 
@@ -58,7 +58,7 @@ class CompraModel(Model):
     def update_compra(self):
 
         try:
-            if quantidade >= 0:
+            if self.quantidade > 0:
                 self.quantidade = self.quantidade - 1
                 self.save()
                 return True

@@ -74,7 +74,7 @@ class Usuario(UsuarioModel):
     def update_pontuacao(self, pontuacao):
 
         try:
-            if self.pontuacao_ranking <= pontuacao:
+            if self.pontuacao_ranking < pontuacao:
                 self.pontuacao_ranking = self.pontuacao_ranking + pontuacao
                 self.pontuacao = self.pontuacao + pontuacao
                 self.save()
