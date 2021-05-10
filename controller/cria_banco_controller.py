@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from model.usuario_model_schema import UsuarioModel
+from model.usuario_model_schema import UsuarioModel, Admin
 from model.categoria_model_schema import CategoriaModel
 from model.palavra_model_schema import PalavraModel
 from model.shop_model_schema import ShopModel
@@ -16,6 +16,10 @@ def cria_banco():
         PalavraModel.create_table()
         ShopModel.create_table()
         CompraModel.create_table()
+
+        usuario = Admin(login = "admin", senha = "admin", admin = 1)
+        usuario.create_usuario()
+        
         return {"Hello": "banco criado"}
 
     except:
