@@ -12,3 +12,7 @@ Para executar o projeto:
   - uvicorn app:app --reload 
   
  - Acesse 127.0.0.1:8000/docs e execute no swagger a rota GET cria_banco
+ - Ao criar o banco de dados, será inserido automaticamento um usuario ADM.
+
+  - login: admin
+  - senha: admin
