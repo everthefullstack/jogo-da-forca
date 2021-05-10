@@ -13,8 +13,8 @@ router = APIRouter()
 @router.post("/admin/cadastrar_shop")
 async def create_shop(shop: Shop, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         shop = ShopModel(nome = shop.nome, valor = shop.valor, imagem = shop.imagem)
         if shop.create_shop():
@@ -29,8 +29,8 @@ async def create_shop(shop: Shop, request: Request):
 @router.get("/admin/ler_shops")
 async def read_shops(request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         lista_shops = []
         shops = ShopModel.read_shops()
@@ -50,8 +50,8 @@ async def read_shops(request: Request):
 @router.get("/admin/ler_shops/{idshop}")
 async def read_shop(request: Request, idshop: int):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         shop = ShopModel.read_shop(idshop)
 
@@ -67,8 +67,8 @@ async def read_shop(request: Request, idshop: int):
 @router.put("/admin/editar_shop/{idshop}")
 async def edit_shop(idshop: int, shop: Shop, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         sho = ShopModel.read_shop(idshop)
 
@@ -85,8 +85,8 @@ async def edit_shop(idshop: int, shop: Shop, request: Request):
 @router.delete("/admin/deletar_shop/{idshop}")
 async def delete_shop(idshop: int, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         shop = ShopModel.read_shop(idshop)
 

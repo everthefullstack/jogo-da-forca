@@ -4,6 +4,7 @@ from model.usuario_model_schema import Usuario
 from model.compra_model_schema import CompraModel
 from model.palavra_model_schema import PalavraModel
 from model.categoria_model_schema import CategoriaModel
+from model.shop_model_schema import ShopModel
 
 router = APIRouter()
 
@@ -32,21 +33,27 @@ async def read_configuracoes(configuracao: Configuracao, request: Request):
         lista_config = []
         lista_cmp = []
         lista_cat = []
+        lista_shops = []
 
         cmp = CompraModel.read_compras_usuario(fkcodusuario=configuracao.fkcodusuario)
         cat = CategoriaModel.read_categorias()
-        
-        if cmp:
+        shp = ShopModel.read_shops()
 
+        if cmp:
             for compra in cmp:
                 lista_cmp.append(compra.json())
         
         if cat:
             for categoria in cat:
                 lista_cat.append(categoria.json())
+
+        if shp:
+            for shop in shp:
+                lista_shops.append(shp.json())
         
         lista_config.append({"lista_compras": lista_cmp})
         lista_config.append({"lista_categorias": lista_cat})
+        lista_config.append({"lista_shops": lista_shops})
 
         return {"mensagem" : lista_config}
 
@@ -116,3 +123,4 @@ async def update_pontuacao(pontuacao: Pontuacao, request: Request):
             return {"mensagem" : "Pontuações não alteradas."}
     else:
         return {"mensagem" : "Usuário não autenticado."}
+

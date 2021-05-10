@@ -12,8 +12,8 @@ router = APIRouter()
 @router.post("/admin/cadastrar_palavra")
 async def create_palavra(palavra: Palavra, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         palavra = PalavraModel(nome = palavra.nome, fkcodcategoria = palavra.fkcodcategoria)
         if palavra.create_palavra():
@@ -28,8 +28,8 @@ async def create_palavra(palavra: Palavra, request: Request):
 @router.get("/admin/ler_palavras")
 async def read_palavras(request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         lista_palavras = []
         palavras = PalavraModel.read_palavras()
@@ -49,8 +49,8 @@ async def read_palavras(request: Request):
 @router.get("/admin/ler_palavras/{idpalavra}")
 async def read_palavra(request: Request, idpalavra: int):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         palavra = PalavraModel.read_palavra(idpalavra)
 
@@ -66,8 +66,8 @@ async def read_palavra(request: Request, idpalavra: int):
 @router.put("/admin/editar_palavra/{idpalavra}")
 async def edit_palavra(idpalavra: int, palavra: Palavra, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         pal = PalavraModel.read_palavra(idpalavra)
 
@@ -84,8 +84,8 @@ async def edit_palavra(idpalavra: int, palavra: Palavra, request: Request):
 @router.delete("/admin/deletar_palavra/{idpalavra}")
 async def delete_palavra(idpalavra: int, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         palavra = PalavraModel.read_palavra(idpalavra)
 

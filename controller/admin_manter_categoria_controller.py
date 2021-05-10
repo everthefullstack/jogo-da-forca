@@ -11,8 +11,8 @@ router = APIRouter()
 @router.post("/admin/cadastrar_categoria")
 async def create_categoria(categoria: Categoria, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         categoria = CategoriaModel(nome = categoria.nome)
 
@@ -28,8 +28,8 @@ async def create_categoria(categoria: Categoria, request: Request):
 @router.get("/admin/ler_categorias")
 async def read_categorias(request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         lista_categorias = []
         categorias = CategoriaModel.read_categorias()
@@ -49,8 +49,8 @@ async def read_categorias(request: Request):
 @router.get("/admin/ler_categorias/{idcategoria}")
 async def read_categoria(request: Request, idcategoria: int):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         categoria = CategoriaModel.read_categoria(idcategoria)
 
@@ -66,8 +66,8 @@ async def read_categoria(request: Request, idcategoria: int):
 @router.put("/admin/editar_categoria/{idcategoria}")
 async def edit_categoria(idcategoria: int, categoria: Categoria, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         cat = CategoriaModel.read_categoria(idcategoria)
 
@@ -84,8 +84,8 @@ async def edit_categoria(idcategoria: int, categoria: Categoria, request: Reques
 @router.delete("/admin/deletar_categoria/{idcategoria}")
 async def delete_categoria(idcategoria: int, request: Request):
 
-    tipo = bool(request.headers["tipo"])
-    if tipo == True:
+    tipo = request.headers["tipo"]
+    if tipo.lower() == "true" or tipo.lower() == "1":
 
         categoria = CategoriaModel.read_categoria(idcategoria)
 
