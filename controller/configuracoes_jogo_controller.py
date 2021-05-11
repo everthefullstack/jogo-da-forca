@@ -49,7 +49,7 @@ async def read_configuracoes(configuracao: Configuracao, request: Request):
 
         if shp:
             for shop in shp:
-                lista_shops.append(shp.json())
+                lista_shops.append(shop.json())
         
         lista_config.append({"lista_compras": lista_cmp})
         lista_config.append({"lista_categorias": lista_cat})
