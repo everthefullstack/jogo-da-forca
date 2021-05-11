@@ -69,7 +69,7 @@ async def read_compras(compra_usuario: CompraUsuario, request: Request):
         return {"mensagem" : "Usuário não autenticado."}
     
 @router.get("/compra/ler_shops")
-async def read_compras(compra_usuario: CompraUsuario, request: Request):
+async def read_compras(request: Request):
 
     token = request.headers["usuario"]
     usuario = Usuario()
