@@ -68,26 +68,26 @@ async def read_compras(compra_usuario: CompraUsuario, request: Request):
     else:
         return {"mensagem" : "Usuário não autenticado."}
     
-@router.get("/compra/ler_compras")
+@router.get("/compra/ler_shops")
 async def read_compras(compra_usuario: CompraUsuario, request: Request):
 
     token = request.headers["usuario"]
     usuario = Usuario()
-    lista_cmp = []
+    lista_shops = []
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
         
-        cmp = CompraModel.read_compras_usuario(compra_usuario.fkcodusuario)
+        shp = ShopModel.read_shops()
 
-        if cmp:
+        if shp:
 
-            for compra in cmp:
-                lista_cmp.append(compra.json())
+            for shop in shp:
+                lista_shops.append(shop.json())
 
-            return {"mensagem" : lista_cmp}
+            return {"mensagem" : lista_shops}
 
         else:
-            return {"mensagem" : lista_cmp}
+            return {"mensagem" : lista_shops}
 
     else:
         return {"mensagem" : "Usuário não autenticado."}
