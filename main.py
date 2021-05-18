@@ -30,4 +30,4 @@ def root():
     
     return {"message": "Hello Bigger Applications!"}
 
-#uvicorn app:app --reload
+#uvicorn main:app --reload

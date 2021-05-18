@@ -1,0 +1,2 @@
+backend - https://github.com/everthefullstack/jogo-da-forca
+frontend - https://github.com/gustavoharff/jogo-forca
