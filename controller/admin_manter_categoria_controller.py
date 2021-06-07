@@ -70,7 +70,6 @@ async def edit_categoria(idcategoria: int, categoria: Categoria, request: Reques
     if tipo.lower() == "true" or tipo.lower() == "1":
 
         cat = CategoriaModel.read_categoria(idcategoria)
-
         if cat:
             cat.update_categoria(nome = categoria.nome)
             return {"mensagem" : "categoria editada."}

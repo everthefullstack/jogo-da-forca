@@ -44,6 +44,7 @@ class CategoriaModel(Model):
             self.save()
 
             return True
+            
         except:
 
             return None
