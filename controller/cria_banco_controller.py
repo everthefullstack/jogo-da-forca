@@ -22,5 +22,6 @@ def cria_banco():
         
         return {"Hello": "banco criado"}
 
-    except:
-        return {"Erro": "Banco não criado"}
+    except Exception as error:
+
+        return {"Erro": f"Banco não criado -> {error}"}
