@@ -71,8 +71,11 @@ async def edit_categoria(idcategoria: int, categoria: Categoria, request: Reques
 
         cat = CategoriaModel.read_categoria(idcategoria)
         if cat:
-            cat.update_categoria(nome = categoria.nome)
-            return {"mensagem" : "categoria editada."}
+            if cat.update_categoria(nome = categoria.nome):
+                return {"mensagem" : "categoria editada."}
+            
+            else:
+                return {"mensagem" : "categoria não editada."}
 
         else:
             return {"mensagem" : "categoria não editada."}
