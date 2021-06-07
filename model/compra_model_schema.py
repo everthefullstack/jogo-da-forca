@@ -27,7 +27,7 @@ class CompraModel(Model):
                 return True
         
         except:
-            self.save(force_insert=True)
+            return None
     
     @classmethod
     def read_compra(cls, idcompra):

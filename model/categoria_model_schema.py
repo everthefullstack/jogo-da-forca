@@ -17,7 +17,7 @@ class CategoriaModel(Model):
             return True
         
         except:
-            self.save(force_insert=True)
+            return None
     
     @classmethod
     def read_categoria(cls, idcategoria):
@@ -45,6 +45,7 @@ class CategoriaModel(Model):
 
             return True
         except:
+
             return None
             
     def delete_categoria(self):

@@ -19,7 +19,7 @@ class PalavraModel(Model):
             return True
         
         except:
-            self.save(force_insert=True)
+            return None
     
     @classmethod
     def read_palavra(cls, idpalavra):

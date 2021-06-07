@@ -28,7 +28,7 @@ class Usuario(UsuarioModel):
             return True
         
         except:
-            self.save(force_insert=True)
+            return None
     
     @classmethod
     def read_usuario(cls, idusuario):
