@@ -1,9 +1,0 @@
-- O que você esta fazendo?
-Criação da função iniciar jogo
-
-- O que você vai fazer?
-Criação da função de configurar jogo
-Criação do acesso ao Shop do sistema
-
-- Esta tendo algum impedimento?
-Nenhum

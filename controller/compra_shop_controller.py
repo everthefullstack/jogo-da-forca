@@ -24,7 +24,7 @@ async def create_compra(compra: Compra, request: Request):
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
         
-        cmp = CompraModel(fkcodshop = compra.fkcodshop, fkcodusuario = compra.fkcodusuario, quantidade = compra.quantidade)
+        cmp = CompraModel()
         shop = ShopModel.read_shop(idshop=compra.fkcodshop)
         usuario = Usuario.read_usuario(idusuario=compra.fkcodusuario)
 
@@ -34,6 +34,7 @@ async def create_compra(compra: Compra, request: Request):
                 return {"mensagem" : "Usuário não tem pontos suficientes para compra."}
 
             else:
+                
                 cmp.create_compra(compra.fkcodshop, compra.fkcodusuario, compra.quantidade)
                 usuario.pontuacao = usuario.pontuacao - (shop.valor * compra.quantidade)
                 usuario.save()

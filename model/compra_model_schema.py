@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField, ForeignKeyField, IntegerField,  Model, SqliteDatabase
+from peewee import PrimaryKeyField, ForeignKeyField, IntegerField,  Model, SqliteDatabase
 from model.shop_model_schema import ShopModel
 from model.usuario_model_schema import UsuarioModel
 
@@ -21,13 +21,14 @@ class CompraModel(Model):
             if compra:
                 compra.quantidade = compra.quantidade + quantidade
                 compra.save()
-                return True
+                return "ok1"
+
             else:
                 self.save()
-                return True
+                return "ok2"
         
-        except:
-            return None
+        except Exception as erro:
+            return str(erro)
     
     @classmethod
     def read_compra(cls, idcompra):
