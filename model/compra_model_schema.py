@@ -14,12 +14,12 @@ class CompraModel(Model):
     class Meta:
         database = db
 
-    def create_compra(self, fkcodshop, fkcodusuario, quantidade):
+    def create_compra(self):
 
         try:
-            compra = CompraModel.get(CompraModel.fkcodshop == fkcodshop, CompraModel.fkcodusuario == fkcodusuario)
+            compra = CompraModel.get_or_none(CompraModel.fkcodshop == self.fkcodshop, CompraModel.fkcodusuario == self.fkcodusuario)
             if compra:
-                compra.quantidade = compra.quantidade + quantidade
+                compra.quantidade = compra.quantidade + self.quantidade
                 compra.save()
                 return True
 
@@ -27,8 +27,8 @@ class CompraModel(Model):
                 self.save()
                 return True
         
-        except:
-            return None
+        except Exception as erro:
+            return str(erro)
     
     @classmethod
     def read_compra(cls, idcompra):

@@ -35,6 +35,7 @@ async def read_configuracoes(configuracao: Configuracao, request: Request):
         lista_cat = []
         lista_shops = []
 
+
         cmp = CompraModel.read_compras_usuario(fkcodusuario=configuracao.fkcodusuario)
         cat = CategoriaModel.read_categorias()
         shp = ShopModel.read_shops()

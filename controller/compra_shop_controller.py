@@ -23,8 +23,8 @@ async def create_compra(compra: Compra, request: Request):
     usuario = Usuario()
 
     if usuario.autenticar(token) == token and(token != 0 and token != None):
-        
-        cmp = CompraModel()
+
+        cmp = CompraModel(fkcodshop=compra.fkcodshop, fkcodusuario=compra.fkcodusuario, quantidade=compra.quantidade)
         shop = ShopModel.read_shop(idshop=compra.fkcodshop)
         usuario = Usuario.read_usuario(idusuario=compra.fkcodusuario)
 
@@ -35,7 +35,7 @@ async def create_compra(compra: Compra, request: Request):
 
             else:
                 
-                cmp.create_compra(compra.fkcodshop, compra.fkcodusuario, compra.quantidade)
+                cmp.create_compra()
                 usuario.pontuacao = usuario.pontuacao - (shop.valor * compra.quantidade)
                 usuario.save()
                 return {"mensagem" : usuario.read_usuario(idusuario = compra.fkcodusuario).json()}
