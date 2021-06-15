@@ -21,14 +21,14 @@ class CompraModel(Model):
             if compra:
                 compra.quantidade = compra.quantidade + quantidade
                 compra.save()
-                return "ok1"
+                return True
 
             else:
                 self.save()
-                return "ok2"
+                return True
         
-        except Exception as erro:
-            return str(erro)
+        except:
+            return None
     
     @classmethod
     def read_compra(cls, idcompra):
